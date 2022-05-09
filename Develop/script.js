@@ -1,11 +1,6 @@
 // Current Day at the top of scheduler
-
-var timeKey;
-var currentHour = moment().format("H");
-console.log(currentHour);
 var currentDay = moment();
 $("#currentDay").text(currentDay.format("dddd, MMM Do, YYYY "));
-console.log(currentDay);
 
 const nineAm = $("#hour-9");
 const tenAm = $("#hour-10");
@@ -29,17 +24,8 @@ var timeArray = [
   fivePm,
 ];
 
-let textArea = $(".text-area");
-//console.log(textArea.val());
-
-let button = $(".saveBtn");
-
-function getFromLocalStorage() {
-  textArea.text = localStorage.getItem("");
-}
-
 function init() {
-  getFromLocalStorage();
+  timeColor();
 
   for (let i = 0; i < timeArray.length; i++) {
     const element = timeArray[i];
@@ -47,17 +33,33 @@ function init() {
       if (event.target.className == "btn saveBtn col-md-1") {
         var eventBlock = $(event.target).siblings();
         var hour = $(event.target).parent().attr("id");
+        console.log(hour);
         localStorage.setItem(hour, eventBlock[1].value);
-        //console.log(hour);
       }
     });
-    //$("#" +timeKey).children().children()
-    localStorage.getItem(timeKey);
-    //console.log($("#" + timeKey).children().children());
-    //use time-array instead of timeKey
-    
+    const text = localStorage.getItem($(element).attr("id"));
+    $(element).children("textarea")[0].value = text;
   }
 };
-//hii
+
+function timeColor() {
+  for (let i = 0; i < timeArray.length; i++) {
+    const element = timeArray[i];
+    const currentTime = i + 9;
+    if (currentTime < moment().format("H")) {
+      $(element).addClass("past");
+      $(element).removeClass("future");
+      $(element).removeClass("present");
+    } else if (currentTime > moment().format("H")) {
+      $(element).addClass("future");
+      $(element).removeClass("past");
+      $(element).removeClass("present");
+    } else if (currentTime == moment().format("H")) {
+      $(element).addClass("present");
+      $(element).removeClass("future");
+      $(element).removeClass("past");
+    }
+  }
+}
 
 init();
