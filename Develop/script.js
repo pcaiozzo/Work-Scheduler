@@ -30,7 +30,7 @@ function init() {
   for (let i = 0; i < timeArray.length; i++) {
     const element = timeArray[i];
     $(element).on("click", function (event) {
-      if (event.target.className == "btn saveBtn col-md-1") {
+      if (event.target.className == "btn saveBtn col-md-2") {
         var eventBlock = $(event.target).siblings();
         var hour = $(event.target).parent().attr("id");
         console.log(hour);
