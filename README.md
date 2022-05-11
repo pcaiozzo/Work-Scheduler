@@ -10,4 +10,4 @@ https://pcaiozzo.github.io/Work-Scheduler/
 
 ## Screenshot
 
-![Screenshot](./images/Capture.PNG
+![Screenshot](./images/Capture.PNG)
